@@ -2,10 +2,7 @@ import React, { Component } from 'react';
 import {connect} from 'react-redux'
 
 
-
 class NewPayment extends Component {
-  
-
   addNewPayment(){
     let price = this.refs.price.value?parseInt(this.refs.price.value): 0
     
@@ -17,7 +14,6 @@ class NewPayment extends Component {
     )
     this.refs.price.value = ""
   }
-
   render() {
   
     let option = this.props.paymentCategory.map((item,index)=>
@@ -40,7 +36,6 @@ class NewPayment extends Component {
 function mapStateToProps(state){
   return state.paymentReducer
 }
-
 function mapDispatchToProps(dispatch){
   return{
       addPayment:(payment)=>{
@@ -53,5 +48,4 @@ function mapDispatchToProps(dispatch){
       }
   }
 }
-
 export default connect(mapStateToProps,mapDispatchToProps)(NewPayment);
