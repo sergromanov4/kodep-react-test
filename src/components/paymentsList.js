@@ -2,8 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux'
 
 class List extends Component {
-
-  render(){
+  render() {
     return(
       <div className="list">
         { this.props.payments.map((item, index)=>

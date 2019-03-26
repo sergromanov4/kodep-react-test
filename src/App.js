@@ -3,7 +3,6 @@ import './App.css';
 
 import Payments from './containers/payments.js'
 
-
 class App extends Component {
   render() {
     return (
@@ -14,7 +13,6 @@ class App extends Component {
            <a href="/">Charts</a>
            <a href="/">Settings</a>
         </header>
-
         <div className="content">
           <Payments />
         </div>
