@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
 import { Route } from 'react-router-dom';
- 
+
 import Payments from './containers/payments.js'
 import Income from './containers/income.js'
 import Header from './containers/header.js'
