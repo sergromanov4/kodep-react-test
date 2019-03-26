@@ -26,7 +26,7 @@
   justify-content: center;
 }
 
-.form{
+form{
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -38,23 +38,23 @@
   border-radius: 15px;
 }
 
-.form input{
+form input{
   width: 350px;
   height: 30px;
   font-size: 20px;
 }
 
-.form select{
+form select{
   width: 350px;
   height: 30px;
   font-size: 20px;
 }
 
-.form p{
+form p{
   color: #fff;
 }
 
-.form button{
+form button{
   width: 150px;
   height: 30px;
  font-size: 20px;

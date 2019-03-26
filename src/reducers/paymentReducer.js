@@ -1,5 +1,5 @@
 const initialState = {
-  paymentCategory:["Food", "Clothes", "Car", "Study"],
+  paymentCategories:["Food", "Clothes", "Car", "Study"],
   payments :[]
 }
 
