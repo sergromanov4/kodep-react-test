@@ -3,36 +3,61 @@ import { connect } from 'react-redux'
 
 
 class NewPayment extends Component {
+  constructor(props){
+    super(props)
+    this.state={ 
+      actualSelect: this.props.paymentCategory[0],
+      actualPrice: ''
+    }
+  }
   
+  changePrice = (event) => {
+    let { actualPrice } = this.state
+    actualPrice = event.target.value
+    this.setState({
+      actualPrice: actualPrice
+    })
+  }
+
+  changeSelect = (event) => {
+    let { actualSelect } = this.state
+    actualSelect = event.target.value
+    this.setState({
+      actualSelect: actualSelect
+    })
+  }
+
   addNewPayment = () => {
-    let value = this.refs.price.value
-    const price = value ? value : 0
+    const { actualPrice } = this.state
+    const price = actualPrice ? actualPrice : 0
 
     this.props.addPayment(
       {
         price: price,
-        category: this.refs.select.value
+        category: this.state.actualSelect
       }
     )
-    value = ""
+  
+    this.setState({
+      actualPrice: ''
+    })
   }
 
   render() {
-    const { paymentCategory }= this.props
-
     return (
-        <div className = "form">
+        <div className="form">
           <p>Select category and write price</p>
 
-          <select ref = 'select'>
-            { paymentCategory.map((item, index) => 
+          <select ref = 'select' onChange={this.changeSelect} value={this.state.actualSelect}>
+            { this.props.paymentCategory.map((item, index) => 
               <option value = {item} key = {index}>
                 {item}
               </option>) }
           </select>
 
-          <input type='number' placeholder="Add price, $" ref="price"/>
-          <button onClick={this.addNewPayment}>Save</button>
+          <input type='number' placeholder="Add price, $" ref="price" 
+                onChange={this.changePrice} value={this.state.actualPrice}/>
+          <button onClick = {this.addNewPayment}>Save</button>
         </div>
     );
   }
