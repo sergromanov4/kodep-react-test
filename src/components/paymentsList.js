@@ -6,10 +6,10 @@ class List extends Component {
   render(){
     return(
       <div className="list">
-        {this.props.payments.map((item, index)=>
+        { this.props.payments.map((item, index)=>
           <p key={index}>
               {`${item.price}, $`}  |  {item.category}
-          </p>)}
+          </p>) }
       </div>
      )
   }
