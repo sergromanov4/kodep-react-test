@@ -1,33 +1,75 @@
 .App {
   text-align: center;
 }
-
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 40vmin;
-  pointer-events: none;
+.App-header a {
+  color: #fff;
+  text-decoration: none
 }
 
 .App-header {
   background-color: #282c34;
-  min-height: 100vh;
+  min-height: 5vh;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 1vmin);
+  color: white;
+}
+.App-header a {
+  margin-right: 20px;
+}
+
+.content {
+  margin-top: 30px;
+  display: flex; 
+  justify-content: center;
+}
+
+form {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  justify-content: space-around;
+  background: #282c34;
+  height: 300px;
+  width: 500px;
+  font-size: 20px;
+  border-radius: 15px;
 }
 
-.App-link {
-  color: #61dafb;
+form input {
+  width: 350px;
+  height: 30px;
+  font-size: 20px;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+form select {
+  width: 350px;
+  height: 30px;
+  font-size: 20px;
+}
+
+form p {
+  color: #fff;
+}
+
+form button {
+  width: 150px;
+  height: 30px;
+ font-size: 20px;
+ }
+
+.list {
+  margin-top: 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  background: #282c34;
+  color: #fff;
+  border-radius: 15px;
+}
+.list p {
+  border-bottom: 2px solid #fff
 }
