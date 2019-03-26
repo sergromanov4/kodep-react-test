@@ -58,7 +58,7 @@ function mapDispatchToProps(dispatch){
       addPayment:(payment) => {
         dispatch(
           {
-            type:"ADD_PAYMENT",
+            type: "ADD_PAYMENT",
             payload: payment
           }
         )

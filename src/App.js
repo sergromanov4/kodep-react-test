@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import './App.css';
 
 import Payments from './containers/payments.js'
+import Income from './containers/income.js'
 
 class App extends Component {
   render() {
@@ -15,6 +16,8 @@ class App extends Component {
         </header>
         <div className="content">
           <Payments />
+          <br />
+          <Income />
         </div>
       </div>
     );
