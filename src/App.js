@@ -13,7 +13,7 @@ class App extends Component {
         <Header />
         <div className="content">
           <Route exact path='/' component={Payments}/>
-          <Route path='/income' component={Income}/>
+          <Route       path='/income' component={Income}/>
         </div>
       </div>
     );
