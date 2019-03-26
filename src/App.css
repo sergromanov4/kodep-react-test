@@ -1,8 +1,8 @@
 .App {
   text-align: center;
 }
-a {
-  color: #fff !important;
+.App-header a {
+  color: #fff;
   text-decoration: none
 }
 

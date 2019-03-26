@@ -4,12 +4,14 @@ import {connect} from 'react-redux'
 class List extends Component {
 
   render(){
-   let list = this.props.payments.map((item,index)=>
-              <p key={index}>{`${item.price}, $`}  |  {item.category}</p>)
+   const list = this.props.payments
 
     return(
       <div className="list">
-        {list}
+        {list.map((item, index)=>
+          <p key={index}>
+              {`${item.price}, $`}  |  {item.category}
+          </p>)}
       </div>
      )
   }
