@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux'
 
 class NewIncome extends Component {
-  state={
+  state = {
     category: this.props.incomeCategories[0],
     money: ''
   }
@@ -32,7 +32,7 @@ class NewIncome extends Component {
           value={category}
         >
           {this.props.incomeCategories.map((item,index) => 
-            <option key={index}>
+            <option value={item} key={index}>
               {item}
             </option>)}
         </select>
