@@ -26,7 +26,7 @@ class NewPayment extends Component {
           <select ref='select'>
             { option }
           </select>
-          <input type='text' placeholder="Add price, $" ref="price"/>
+          <input type='number' placeholder="Add price, $" ref="price"/>
           <button onClick={()=>this.addNewPayment()}>Save</button>
         </div>
     );
