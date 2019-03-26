@@ -28,13 +28,13 @@ class NewPayment extends Component {
   }
 
   addNewPayment = () => {
-    const { actualPrice } = this.state
+    const { actualPrice, actualSelect } = this.state
     const price = actualPrice ? actualPrice : 0
 
     this.props.addPayment(
       {
         price: price,
-        category: this.state.actualSelect
+        category: actualSelect
       }
     )
   
