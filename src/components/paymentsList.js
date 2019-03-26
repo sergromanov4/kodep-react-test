@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
-import {connect} from 'react-redux'
+import { connect } from 'react-redux'
 
 class List extends Component {
 
   render(){
-   const list = this.props.payments
+   const { payments } = this.props
 
     return(
       <div className="list">
-        {list.map((item, index)=>
+        {payments.map((item, index)=>
           <p key={index}>
               {`${item.price}, $`}  |  {item.category}
           </p>)}

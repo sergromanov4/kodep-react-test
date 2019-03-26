@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {connect} from 'react-redux'
+import { connect } from 'react-redux'
 
 
 class NewPayment extends Component {
@@ -18,21 +18,21 @@ class NewPayment extends Component {
   }
 
   render() {
-    const option = this.props.paymentCategory
+    const { paymentCategory }= this.props
 
     return (
-        <div className="form">
+        <div className = "form">
           <p>Select category and write price</p>
 
-          <select ref='select'>
-            { option.map((item, index) => 
-              <option value={item} key={index}>
+          <select ref = 'select'>
+            { paymentCategory.map((item, index) => 
+              <option value = {item} key = {index}>
                 {item}
               </option>) }
           </select>
 
           <input type='number' placeholder="Add price, $" ref="price"/>
-          <button onClick={this.addNewPayment.bind(this)}>Save</button>
+          <button onClick={this.addNewPayment}>Save</button>
         </div>
     );
   }
@@ -43,7 +43,7 @@ function mapStateToProps(state){
 }
 function mapDispatchToProps(dispatch){
   return{
-      addPayment:(payment)=>{
+      addPayment:(payment) => {
         dispatch(
           {
             type:"ADD_PAYMENT",

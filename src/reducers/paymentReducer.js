@@ -1,4 +1,4 @@
-let initialState = {
+const initialState = {
   paymentCategory:["Food", "Clothes", "Car", "Study"],
   payments :[]
 }
