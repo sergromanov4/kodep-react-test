@@ -45,13 +45,13 @@ class NewPayment extends Component {
     return (
         <div className="form">
           <p>Select category and write price</p>
-          <select ref='select' onChange={this.changeSelect} value={this.state.actualSelect}>
+          <select onChange={this.changeSelect} value={this.state.actualSelect}>
             { this.props.paymentCategory.map((item, index) => 
               <option value={item} key={index}>
                 { item }
               </option>) }
           </select>
-          <input type='number' placeholder="Add price, $" ref="price" 
+          <input type='number' placeholder="Add price, $" 
                 onChange={this.changePrice} value={this.state.actualPrice}/>
           <button onClick ={this.addNewPayment}>Save</button>
         </div>
