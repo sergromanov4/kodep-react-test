@@ -1,0 +1,27 @@
+.settings {
+  width: 500px;
+  background: #282c34;
+  color: #fff;
+  border-radius: 15px;
+}
+
+.setting-list {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #999;
+}
+
+.setting-list:last-child {
+  border-bottom: none;
+}
+
+.setting-list p {
+  margin-left: 15px;
+}
+
+.btn-box button {
+  margin-right: 10px;
+  font-size: 16px;
+}

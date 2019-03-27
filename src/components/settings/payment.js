@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
 import Modal from 'react-modal'
+import PaymentForm from './forms/paymentForm.js'
+import '../../Css/Settings.css'
 
 class Payment extends Component {
   state = {
@@ -16,18 +18,17 @@ class Payment extends Component {
   }
 
   uniqueFlag() {
-    let unique = false
-    this.props.paymentCategories.map((item) => 
-      (item === this.state.newCategory) ?
-        unique = true : false)
-    return unique
+    const { paymentCategories } = this.props;
+    const { newCategory } = this.state;
+    if(paymentCategories.indexOf(newCategory)>0) return true
+    return false
   }
 
   handeleSubmitNew = event => {
     event.preventDefault()
     const { newCategory } = this.state
-    if ( newCategory && !this.uniqueFlag() ) 
-      this.props.addPaymentCategory(newCategory) 
+    const { addPaymentCategory } = this.props
+    if (newCategory && !this.uniqueFlag()) addPaymentCategory(newCategory) 
     this.setState({ newCategory: "" })
     this.toggleModal()
   }
@@ -35,58 +36,41 @@ class Payment extends Component {
   handeleSubmitEdit = event => {
     event.preventDefault()
     const { editCategory, editIndex } = this.state
-      this.props.editPaymentCategory({ category: editCategory,
-                                       index: editIndex })
+    const { editPaymentCategory } =this.props
+    editPaymentCategory({ 
+      category: editCategory,
+      index: editIndex 
+    })
     this.toggleModal()
   }
 
   handleRemove = index => {
-    if ( window.confirm("You are sure?") )
-      this.props.removePaymentCategory(this.props.paymentCategories[index])
+    const { removePaymentCategory, paymentCategories } = this.props
+    if (window.confirm("Are you sure?"))
+      removePaymentCategory(paymentCategories[index])
   }
 
   toggleModal = () => {
-    this.setState({ isActive: !this.state.isActive })
-    if ( this.state.edit )
-      this.setState({ edit: false }) 
+    const { edit, isActive } = this.state
+    this.setState({ isActive: !isActive })
+    if (edit) this.setState({ edit: false }) 
   }
   
   toggleModalEdit = index => {
-    this.setState({ isActive: !this.state.isActive,
-                    edit: !this.state.edit,
-                    editCategory: this.props.paymentCategories[index],
+    const { edit, isActive } = this.state
+    const { paymentCategories } = this.props
+    this.setState({ isActive: !isActive,
+                    edit: !edit,
+                    editCategory: paymentCategories[index],
                     editIndex: index })
   }
 
   handleChange = event => {
-    this.setState({ [event.target.name]: event.target.value })
+    const { name, value } = event.target
+    this.setState({ [name]: value })
   }
 
   render() {
-    const newForm = 
-      <form className="modal-form" onSubmit={this.handeleSubmitNew}>
-        <p>New category</p>
-        <input 
-          name="newCategory" 
-          placeholder="Add new category" 
-          value={this.state.newCategory} 
-          onChange={this.handleChange}
-        />
-        <button type="submit">Save</button>
-      </form>
-
-    const editForm = 
-      <form className="modal-form" onSubmit={this.handeleSubmitEdit}>
-        <p>Edit category</p>
-        <input 
-          name="editCategory" 
-          placeholder="Edit category" 
-          value={this.state.editCategory} 
-          onChange={this.handleChange}
-        />
-        <button type="submit">Save</button>
-      </form>
-
     return(
       <div className="settings">
         <h2> Payments settings</h2>
@@ -111,7 +95,22 @@ class Payment extends Component {
           className="modal" 
           overlayClassName="modal-overlay"
         >
-          {this.state.edit ? editForm : newForm}
+          {this.state.edit ? 
+            <PaymentForm 
+              title="Edit category"
+              submitForm={this.handeleSubmitEdit} 
+              categoryValue={this.state.editCategory}
+              changeValue={this.handleChange}
+              name="editCategory"
+            />
+          :
+            <PaymentForm 
+              title="New category"
+              submitForm={this.handeleSubmitNew} 
+              categoryValue={this.state.newCategory}
+              changeValue={this.handleChange}
+              name="newCategory"
+            />}
         </Modal>
       </div> 
     )
