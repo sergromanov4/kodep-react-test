@@ -87,6 +87,7 @@ form button {
   color: #fff;
   border-radius: 15px;
 }
+
 .setting-list {
   display: flex;
   flex-direction: row;
@@ -99,7 +100,7 @@ form button {
   border-bottom: none;
 }
 
-.setting-list p{
+.setting-list p {
   margin-left: 15px;
 }
 
@@ -121,14 +122,13 @@ form button {
 }
 
 .modal-overlay {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: rgba(40, 44, 52, 0.7);
-
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(40, 44, 52, 0.7);
 }
