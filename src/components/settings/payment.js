@@ -20,7 +20,7 @@ class Payment extends Component {
   uniqueFlag() {
     const { paymentCategories } = this.props;
     const { newCategory } = this.state;
-    if(paymentCategories.indexOf(newCategory)>0) return true
+    if (paymentCategories.indexOf(newCategory)>0) return true
     return false
   }
 
