@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import Modal from 'react-modal'
 
 class Payment extends Component {
-  state={
+  state = {
     isActive: false,
     newCategory: '',
     editCategory: '',
@@ -11,10 +11,22 @@ class Payment extends Component {
     edit: false
   }
 
+  componentWillMount() {
+    Modal.setAppElement('body')
+  }
+
+  uniqueFlag() {
+    let unique = false
+    this.props.paymentCategories.map((item) => 
+      (item === this.state.newCategory) ?
+        unique = true : false)
+    return unique
+  }
+
   handeleSubmitNew = event => {
     event.preventDefault()
     const { newCategory } = this.state
-    if (newCategory) 
+    if ( newCategory && !this.uniqueFlag() ) 
       this.props.addPaymentCategory(newCategory) 
     this.setState({ newCategory: "" })
     this.toggleModal()
@@ -23,18 +35,19 @@ class Payment extends Component {
   handeleSubmitEdit = event => {
     event.preventDefault()
     const { editCategory, editIndex } = this.state
-    this.props.editPaymentCategory({ category: editCategory,
-                                     index: editIndex })
+      this.props.editPaymentCategory({ category: editCategory,
+                                       index: editIndex })
     this.toggleModal()
   }
 
   handleRemove = index => {
-    this.props.removePaymentCategory(this.props.paymentCategories[index])
+    if ( window.confirm("You are sure?") )
+      this.props.removePaymentCategory(this.props.paymentCategories[index])
   }
 
   toggleModal = () => {
     this.setState({ isActive: !this.state.isActive })
-    if (this.state.edit)
+    if ( this.state.edit )
       this.setState({ edit: false }) 
   }
   
@@ -43,10 +56,6 @@ class Payment extends Component {
                     edit: !this.state.edit,
                     editCategory: this.props.paymentCategories[index],
                     editIndex: index })
-  }
-
-  componentWillMount() {
-    Modal.setAppElement('body')
   }
 
   handleChange = event => {
@@ -115,32 +124,25 @@ function mapStateToProps(state){
 
 function mapDispatchToProps(dispatch){
   return{
-     removePaymentCategory:(category) => {
-        dispatch(
-          {
-            type: "REMOVE_PAYMENT_CATEGORY",
-            payload: category
-          }
-        )
-      },
-      addPaymentCategory:(payment) => {
-        dispatch(
-          {
-            type: "ADD_NEW_CATEGORY",
-            payload: payment
-          }
-        )
-      },
-      editPaymentCategory:(category) => {
-        dispatch(
-          {
-            type: "EDIT_CATEGORY",
-            payload: category
-          }
-        )
-      }
+    removePaymentCategory:(category) => {
+      dispatch({
+        type: "REMOVE_PAYMENT_CATEGORY",
+        payload: category
+      })
+    },
+    addPaymentCategory:(payment) => {
+      dispatch({
+        type: "ADD_NEW_CATEGORY",
+        payload: payment
+      })
+    },
+    editPaymentCategory:(category) => {
+      dispatch({
+        type: "EDIT_CATEGORY",
+        payload: category
+      })
+    }
   }
 }
-
 
 export default connect(mapStateToProps,mapDispatchToProps)(Payment);
