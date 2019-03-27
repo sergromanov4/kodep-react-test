@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import '../../../Css/Modal.css';
+import '../../../css/Modal.css';
 
 class PaymentForm extends Component {
   render() {
@@ -14,7 +14,7 @@ class PaymentForm extends Component {
         />
         <button type="submit">Save</button>
       </form>
-     )
+    )
   }
 }
 

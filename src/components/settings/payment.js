@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux'
 import Modal from 'react-modal'
 import PaymentForm from './forms/paymentForm.js'
-import '../../Css/Settings.css'
+import '../../css/Settings.css'
 
 class Payment extends Component {
   state = {
@@ -110,7 +110,8 @@ class Payment extends Component {
               categoryValue={this.state.newCategory}
               changeValue={this.handleChange}
               name="newCategory"
-            />}
+            />
+          }
         </Modal>
       </div> 
     )
