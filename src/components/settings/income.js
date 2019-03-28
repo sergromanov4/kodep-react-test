@@ -4,7 +4,7 @@ import Modal from 'react-modal'
 import Form from './forms/Form.js'
 import '../../css/Settings.css'
 
-class Payment extends Component {
+class Income extends Component {
   state = {
     isActive: false,
     newCategory: '',
@@ -18,17 +18,17 @@ class Payment extends Component {
   }
 
   uniqueFlag() {
-    const { paymentCategories } = this.props;
+    const { incomeCategories } = this.props;
     const { newCategory } = this.state;
-    if (paymentCategories.indexOf(newCategory)>0) return true
+    if (incomeCategories.indexOf(newCategory)>0) return true
     return false
   }
 
   handeleSubmitNew = event => {
     event.preventDefault()
     const { newCategory } = this.state
-    const { addPaymentCategory } = this.props
-    if (newCategory && !this.uniqueFlag()) addPaymentCategory(newCategory) 
+    const { addIncomeCategory } = this.props
+    if (newCategory && !this.uniqueFlag()) addIncomeCategory(newCategory) 
     this.setState({ newCategory: "" })
     this.toggleModal()
   }
@@ -36,8 +36,8 @@ class Payment extends Component {
   handeleSubmitEdit = event => {
     event.preventDefault()
     const { editCategory, editIndex } = this.state
-    const { editPaymentCategory } =this.props
-    editPaymentCategory({ 
+    const { editIncomeCategory } =this.props
+    editIncomeCategory({ 
       category: editCategory,
       index: editIndex 
     })
@@ -45,9 +45,9 @@ class Payment extends Component {
   }
 
   handleRemove = index => {
-    const { removePaymentCategory, paymentCategories } = this.props
+    const { removeIncomeCategory, incomeCategories } = this.props
     if (window.confirm("Are you sure?"))
-      removePaymentCategory(paymentCategories[index])
+      removeIncomeCategory(incomeCategories[index])
   }
 
   toggleModal = () => {
@@ -58,10 +58,10 @@ class Payment extends Component {
   
   toggleModalEdit = index => {
     const { edit, isActive } = this.state
-    const { paymentCategories } = this.props
+    const { incomeCategories } = this.props
     this.setState({ isActive: !isActive,
                     edit: !edit,
-                    editCategory: paymentCategories[index],
+                    editCategory: incomeCategories[index],
                     editIndex: index })
   }
 
@@ -73,9 +73,9 @@ class Payment extends Component {
   render() {
     return(
       <div className="settings">
-        <h2> Payments settings</h2>
-        <button onClick={this.toggleModal}>New payment category</button>
-        {this.props.paymentCategories.map((item, index)=>
+        <h2> Income settings</h2>
+        <button onClick={this.toggleModal}>New income category</button>
+        {this.props.incomeCategories.map((item, index)=>
           <div className="setting-list" key={index}>
             <p>{item}</p>
             <div className='btn-box'>
@@ -119,30 +119,30 @@ class Payment extends Component {
 }
 
 function mapStateToProps(state){
-  return state.paymentReducer
+  return state.incomeReducer
 }
 
 function mapDispatchToProps(dispatch){
   return{
-    removePaymentCategory:(category) => {
+    removeIncomeCategory:(category) => {
       dispatch({
-        type: "REMOVE_PAYMENT_CATEGORY",
+        type: "REMOVE_INCOME_CATEGORY",
         payload: category
       })
     },
-    addPaymentCategory:(payment) => {
+    addIncomeCategory:(income) => {
       dispatch({
-        type: "ADD_NEW_PAYMENT_CATEGORY",
-        payload: payment
+        type: "ADD_NEW_INCOME_CATEGORY",
+        payload: income
       })
     },
-    editPaymentCategory:(category) => {
+    editIncomeCategory:(category) => {
       dispatch({
-        type: "EDIT_PAYMENT_CATEGORY",
+        type: "EDIT_INCOME_CATEGORY",
         payload: category
       })
     }
   }
 }
 
-export default connect(mapStateToProps,mapDispatchToProps)(Payment);
+export default connect(mapStateToProps,mapDispatchToProps)(Income);

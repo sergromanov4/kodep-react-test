@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import '../../../css/Modal.css';
 
-class PaymentForm extends Component {
+class Form extends Component {
   render() {
     return(
       <form className="modal-form" onSubmit={this.props.submitForm}> 
@@ -18,4 +18,4 @@ class PaymentForm extends Component {
   }
 }
 
-export default PaymentForm
+export default Form

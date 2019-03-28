@@ -1,12 +1,26 @@
-const initialState = {
-  incomeCategories:["Salary", "Donate", "Debt"],
-  income :[]
-}
-
+const initialState = localStorage['redux-store'] ? 
+    JSON.parse(localStorage['redux-store']).incomeReducer 
+  : 
+    {
+      incomeCategories: ["Salary", "Donate", "Debt"],
+      income :[]
+    }
+ 
 function incomeReducer(state=initialState,action){
   switch(action.type){
     case "ADD_INCOME":
       return {...state, income:[...state.income, action.payload]}
+    case "ADD_NEW_INCOME_CATEGORY":
+      return {...state, incomeCategories: [...state.incomeCategories, action.payload]}
+    case "EDIT_INCOME_CATEGORY":
+      return {...state, 
+               incomeCategories: state.incomeCategories.map(
+                 (item,index) => index === action.payload.index ? 
+                   item = action.payload.category : item
+               )
+             }
+    case "REMOVE_INCOME_CATEGORY":
+      return {...state, incomeCategories: state.incomeCategories.filter( item => item !== action.payload )}
     default:
       return state
  }
