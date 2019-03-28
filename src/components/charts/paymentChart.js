@@ -6,16 +6,16 @@ import '../../css/Charts.css'
 
 class paymentChart extends Component {
   state={
-    data:{
-      labels:[],
-      datasets:[{
+    data: {
+      labels: [],
+      datasets: [{
         data: [],
         backgroundColor: colors
       }]
     }
   }
 
-  componentWillMount(){
+  componentWillMount() {
     let total = {}
     const { labels, datasets } =  this.state.data
     this.props.payments.forEach(item => {
@@ -30,23 +30,24 @@ class paymentChart extends Component {
     }
   }
 
-
   render() {
     return(
       <div className="charts">
         <p>Payment Charts</p>
         {this.props.payments[0]? 
-          <Pie 
-            data={this.state.data}
-            width={400}
-            height={400} 
-          />
+          <div> 
+            <Pie 
+             data={this.state.data}
+             width={400}
+             height={400} 
+            />
+            <p> Total payment:  
+              {this.state.data.datasets[0].data.reduce((sum, current) => sum + current)}
+            </p>
+          </div>
           :
           <p>Payment list is empty</p>
-          }
-        <p> Total payment:  
-          {this.state.data.datasets[0].data.reduce((sum, current) => sum+current)}
-        </p>
+        }
       </div>
      )
   }

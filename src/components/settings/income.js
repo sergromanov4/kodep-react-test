@@ -74,7 +74,7 @@ class Income extends Component {
     return(
       <div className="settings">
         <h2> Income settings</h2>
-        <button onClick={this.toggleModal}>New income category</button>
+        <button onClick={this.toggleModal} className="new-btn">New income category</button>
         {this.props.incomeCategories.map((item, index)=>
           <div className="setting-list" key={index}>
             <p>{item}</p>
