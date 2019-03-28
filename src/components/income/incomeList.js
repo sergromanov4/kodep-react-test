@@ -5,7 +5,7 @@ class List extends Component {
   render() {
     return(
       <div className="list">
-        {this.props.income.map((item, index)=>
+        {this.props.income.reverse().map((item, index)=>
           <p key={index}>
               {`${item.money}, $`}  |  {item.category}
           </p>)}
