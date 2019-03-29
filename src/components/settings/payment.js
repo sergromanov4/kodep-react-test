@@ -45,9 +45,11 @@ class Payment extends Component {
   }
 
   handleRemove = index => {
-    const { removePaymentCategory, paymentCategories } = this.props
-    if (window.confirm("Are you sure?"))
+    const { removePaymentCategory, paymentCategories, editRemovePaymentCategory } = this.props
+    if (window.confirm("Are you sure?")){
       removePaymentCategory(paymentCategories[index])
+      editRemovePaymentCategory(paymentCategories[index])
+    }
   }
 
   toggleModal = () => {
@@ -127,6 +129,12 @@ function mapDispatchToProps(dispatch){
     removePaymentCategory:(category) => {
       dispatch({
         type: "REMOVE_PAYMENT_CATEGORY",
+        payload: category
+      })
+    },
+    editRemovePaymentCategory:(category) => {
+      dispatch({
+        type: "EDIT_REMOVE_PAYMENT_CATEGORY",
         payload: category
       })
     },

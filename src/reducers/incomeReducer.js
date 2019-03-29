@@ -19,6 +19,13 @@ function incomeReducer(state=initialState,action){
                    item = action.payload.category : item
                )
              }
+    case "EDIT_REMOVE_INCOME_CATEGORY":
+      return {...state, 
+               income: state.income.map(
+                 item => item.category === action.payload ? 
+                   {...item, category : "Other"} : item
+               )
+             }
     case "REMOVE_INCOME_CATEGORY":
       return {...state, incomeCategories: state.incomeCategories.filter( item => item !== action.payload )}
     default:

@@ -19,6 +19,13 @@ function paymentReducer(state=initialState,action){
                    item = action.payload.category : item
                )
              }
+    case "EDIT_REMOVE_PAYMENT_CATEGORY":
+      return {...state, 
+               payments: state.payments.map(
+                 item => item.category === action.payload ? 
+                   {...item, category : "Other"} : item
+               )
+             }
     case "REMOVE_PAYMENT_CATEGORY":
       return {...state, paymentCategories: state.paymentCategories.filter( item => item !== action.payload )}
     default:

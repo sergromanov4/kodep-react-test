@@ -45,9 +45,11 @@ class Income extends Component {
   }
 
   handleRemove = index => {
-    const { removeIncomeCategory, incomeCategories } = this.props
-    if (window.confirm("Are you sure?"))
+    const { removeIncomeCategory, incomeCategories, editRemoveIncomeCategory } = this.props
+    if (window.confirm("Are you sure?")) {
       removeIncomeCategory(incomeCategories[index])
+      editRemoveIncomeCategory(incomeCategories[index])
+    }
   }
 
   toggleModal = () => {
@@ -127,6 +129,12 @@ function mapDispatchToProps(dispatch){
     removeIncomeCategory:(category) => {
       dispatch({
         type: "REMOVE_INCOME_CATEGORY",
+        payload: category
+      })
+    },
+    editRemoveIncomeCategory:(category) => {
+      dispatch({
+        type: "EDIT_REMOVE_INCOME_CATEGORY",
         payload: category
       })
     },
