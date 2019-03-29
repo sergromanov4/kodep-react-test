@@ -48,7 +48,8 @@ class NewPayment extends Component {
           </select>
           <input 
             name="price" 
-            type='number' 
+            type='number'
+            min='0' 
             placeholder="Add price, $" 
             onChange={this.handleChange} 
             value={price}

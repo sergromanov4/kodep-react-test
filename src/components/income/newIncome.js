@@ -41,6 +41,7 @@ class NewIncome extends Component {
         </select>
         <input 
           type="number"
+          min='0'
           name="money"
           placeholder="Add your salary, $"
           onChange={this.handleChange}
