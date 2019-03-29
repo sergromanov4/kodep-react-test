@@ -16,7 +16,8 @@ class NewIncome extends Component {
     const { money, category } = this.state
     this.props.addIncome({
         money: money || 0,
-        category
+        category,
+        date: new Date()
     })
     this.setState({ money: ''})
   }

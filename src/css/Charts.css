@@ -1,3 +1,15 @@
 .charts{
   margin-right: 30px;
 }
+
+.data-form {
+  margin: auto;
+  height: 100px;
+}
+
+.charts-box {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}

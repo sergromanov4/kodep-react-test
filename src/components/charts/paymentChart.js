@@ -12,17 +12,18 @@ class paymentChart extends Component {
         data: [],
         backgroundColor: colors
       }]
-    }
+   }
   }
 
   componentWillMount() {
     let total = {}
     const { labels, datasets } =  this.state.data
-    this.props.payments.forEach(item => {
+    this.props.paymentReducer.payments.forEach(item => {
+    if(new Date(item.date).getMonth() === this.props.timeReducer.currentDate){
       total[item.category] ?
       total[item.category] += +item.price
       :
-      total[item.category] = +item.price
+      total[item.category] = +item.price}
     })
     for (let key in total) {
       labels.push(key)
@@ -34,7 +35,7 @@ class paymentChart extends Component {
     return(
       <div className="charts">
         <p>Payment Charts</p>
-        {this.props.payments[0]? 
+        {this.state.data.labels[0]? 
           <div> 
             <Pie 
              data={this.state.data}
@@ -42,7 +43,7 @@ class paymentChart extends Component {
              height={400} 
             />
             <p> Total payment:  
-              {this.state.data.datasets[0].data.reduce((sum, current) => sum + current)}
+              {this.state.data.datasets[0].data.reduce((sum, current) => sum + current)}, $
             </p>
           </div>
           :
@@ -54,7 +55,7 @@ class paymentChart extends Component {
 }
 
 function mapStateToProps(state){
-  return state.paymentReducer
+  return state
 }
 
 export default connect(mapStateToProps)(paymentChart);

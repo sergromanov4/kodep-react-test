@@ -12,17 +12,19 @@ class incomeChart extends Component {
         data: [],
         backgroundColor: colors
       }]
-    }
+   }
   }
 
   componentWillMount() {
     let total = {}
     const { labels, datasets } =  this.state.data
-    this.props.income.forEach( item => {
+    this.props.incomeReducer.income.forEach(item => {
+      console.log()
+    if(new Date(item.date).getMonth() === this.props.timeReducer.currentDate){
       total[item.category] ?
       total[item.category] += +item.money
       :
-      total[item.category] = +item.money
+      total[item.category] = +item.money}
     })
     for (let key in total) {
       labels.push(key)
@@ -34,15 +36,15 @@ class incomeChart extends Component {
     return(
       <div className="charts">
         <p>Income Charts</p>
-        {this.props.income[0]? 
-          <div>
+        {this.state.data.labels[0]? 
+          <div> 
             <Pie 
-              data={this.state.data}
-              width={400}
-              height={400} 
+             data={this.state.data}
+             width={400}
+             height={400} 
             />
             <p> Total income:  
-              {this.state.data.datasets[0].data.reduce((sum, current) => sum + current)}
+              {this.state.data.datasets[0].data.reduce((sum, current) => sum + current)}, $
             </p>
           </div>
           :
@@ -54,7 +56,7 @@ class incomeChart extends Component {
 }
 
 function mapStateToProps(state){
-  return state.incomeReducer
+  return state
 }
 
 export default connect(mapStateToProps)(incomeChart);

@@ -16,7 +16,8 @@ class NewPayment extends Component {
     const { price, category } = this.state
     this.props.addPayment({
         price: price || 0,
-        category
+        category,
+        date: new Date()
     })
     this.setState({ price: ''})
   }
