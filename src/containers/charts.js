@@ -55,7 +55,7 @@ class Charts extends Component {
           <PaymentChart count={this.countPayment} />
           <IncomeChart count={this.countIncome} />
         </div>
-        { this.state.totalPayment-this.state.totalIncome !=0 ?
+        { this.state.totalPayment-this.state.totalIncome !== 0 ?
             this.state.totalPayment-this.state.totalIncome > 0 ? 
             <p>More payments</p> : <p>Income more</p>
           : 
