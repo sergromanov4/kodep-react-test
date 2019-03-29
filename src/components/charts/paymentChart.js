@@ -18,8 +18,9 @@ class paymentChart extends Component {
   componentWillMount() {
     let total = {}
     const { labels, datasets } =  this.state.data
-    this.props.paymentReducer.payments.forEach(item => {
-    if(new Date(item.date).getMonth() === this.props.timeReducer.currentDate){
+    const { paymentReducer, timeReducer } = this.props
+    paymentReducer.payments.forEach(item => {
+    if (new Date(item.date).getMonth() === timeReducer.currentDate) {
       total[item.category] ?
       total[item.category] += +item.price
       :

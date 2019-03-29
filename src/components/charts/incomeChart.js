@@ -18,9 +18,10 @@ class incomeChart extends Component {
   componentWillMount() {
     let total = {}
     const { labels, datasets } =  this.state.data
-    this.props.incomeReducer.income.forEach(item => {
+    const { incomeReducer, timeReducer } = this.props
+    incomeReducer.income.forEach(item => {
       console.log()
-    if(new Date(item.date).getMonth() === this.props.timeReducer.currentDate){
+    if (new Date(item.date).getMonth() === timeReducer.currentDate) {
       total[item.category] ?
       total[item.category] += +item.money
       :
