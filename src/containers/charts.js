@@ -60,7 +60,9 @@ class Charts extends Component {
         </div>
         {totalPayment-totalIncome !== 0 ?
           totalPayment-totalIncome > 0 ? 
-            <p>More payments</p> : <p>Income more</p>
+              <p>More payments by {Math.abs(totalPayment-totalIncome)}, $</p> 
+            : 
+              <p>Income more by {Math.abs(totalPayment-totalIncome)}, $</p>
           : 
           <p>Payments are equal to income</p>}
       </div>

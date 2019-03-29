@@ -6,7 +6,7 @@ class List extends Component {
     const { income } = this.props
     return(
       <div className="list">
-        {income.reverse().map((item, index)=>
+        {income.map((item, index)=>
           <p key={index}>
               {`${item.money}, $`}  |  {item.category}
           </p>)}

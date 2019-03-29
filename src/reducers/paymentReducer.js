@@ -10,7 +10,7 @@ const initialState = localStorage['redux-store'] ?
 function paymentReducer(state=initialState,action){
   switch(action.type){
     case "ADD_PAYMENT":
-      return {...state, payments:[...state.payments, action.payload]}
+      return {...state, payments:[action.payload,...state.payments]}
     case "ADD_LAST_PRICE":
       return {...state, lastValue: {...state.lastValue,[action.payload.category]: action.payload.price}}
     case "ADD_NEW_PAYMENT_CATEGORY":
