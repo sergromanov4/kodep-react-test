@@ -31,6 +31,7 @@ class incomeChart extends Component {
       labels.push(key)
       datasets[0].data.push(total[key])
     }
+    this.props.count(this.state.data.datasets[0].data.reduce((sum, current) => sum + current))
   }
 
   render() {

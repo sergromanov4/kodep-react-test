@@ -8,7 +8,17 @@ class Charts extends Component {
     date: ['January', 'February', 'March',
             'April', 'May', 'June', 'July', 
             'August', 'September', 'October', 
-            'November', 'December'],       
+            'November', 'December'],
+    totalPayment: 0,
+    totalIncome: 0       
+  }
+
+  countPayment = value => {
+   this.setState({ totalPayment: value })
+  }
+
+  countIncome = value => {
+   this.setState({ totalIncome: value })
   }
 
   handleChange = event => {
@@ -42,9 +52,11 @@ class Charts extends Component {
           <button type="submit">select</button>
         </form>
         <div className="charts-box">
-          <PaymentChart />
-          <IncomeChart />
+          <PaymentChart count={this.countPayment} />
+          <IncomeChart count={this.countIncome} />
         </div>
+        {this.state.totalPayment-this.state.totalIncome > 0 ? 
+          <p>More payments</p> : <p>Income more</p>}
       </div>
     )
   }
