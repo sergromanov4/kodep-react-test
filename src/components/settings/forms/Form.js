@@ -3,17 +3,24 @@ import '../../../css/Modal.css';
 
 class Form extends Component {
   render() {
+    const { submitForm, title, unique, 
+            name, categoryValue, changeValue} = this.props
     return(
-      <form className="modal-form" onSubmit={this.props.submitForm}> 
-        <p>{this.props.title}</p>
+      <form className="modal-form" onSubmit={submitForm }> 
+        <p>{title}</p>
         <input 
-          className={this.props.unique ? 'alarm' : ''}
-          name={this.props.name} 
+          className={(unique || !categoryValue) ? 'alarm' : ''}
+          name={name} 
           placeholder={this.props.title} 
-          value={this.props.categoryValue} 
-          onChange={this.props.changeValue}
+          value={categoryValue} 
+          onChange={changeValue}
         />
-        <button type="submit" disabled={this.props.unique}>Save</button>
+        <button 
+          type="submit" 
+          disabled={unique || !categoryValue}
+        >
+        Save
+        </button>
       </form>
     )
   }
