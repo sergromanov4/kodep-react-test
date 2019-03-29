@@ -31,7 +31,12 @@ class incomeChart extends Component {
       labels.push(key)
       datasets[0].data.push(total[key])
     }
-    this.props.count(this.state.data.datasets[0].data.reduce((sum, current) => sum + current))
+    this.difference()
+  }
+
+  difference() {
+    if (this.state.data.labels[0])
+    return this.props.count(this.state.data.datasets[0].data.reduce((sum, current) => sum + current))
   }
 
   render() {
@@ -46,7 +51,7 @@ class incomeChart extends Component {
              height={400} 
             />
             <p> Total income:  
-              {this.state.data.datasets[0].data.reduce((sum, current) => sum + current)}, $
+              {this.difference()}, $
             </p>
           </div>
           :

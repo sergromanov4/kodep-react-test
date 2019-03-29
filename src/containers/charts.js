@@ -55,8 +55,11 @@ class Charts extends Component {
           <PaymentChart count={this.countPayment} />
           <IncomeChart count={this.countIncome} />
         </div>
-        {this.state.totalPayment-this.state.totalIncome > 0 ? 
-          <p>More payments</p> : <p>Income more</p>}
+        { this.state.totalPayment-this.state.totalIncome !=0 ?
+            this.state.totalPayment-this.state.totalIncome > 0 ? 
+            <p>More payments</p> : <p>Income more</p>
+          : 
+          <p>Payments are equal to income</p>}
       </div>
     )
   }
@@ -68,7 +71,7 @@ function mapStateToProps(state){
 
 function mapDispatchToProps(dispatch){
   return{
-      changeData:(data) => {
+      changeData: data => {
         dispatch({
             type: "CHANGE_DATA",
             payload: data
