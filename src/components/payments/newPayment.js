@@ -8,6 +8,10 @@ class NewPayment extends Component {
   }
   
   handleChange = event => {
+    (event.target.name === "category" &&  this.props.lastValue[event.target.value])?
+      this.setState({ price: this.props.lastValue[event.target.value] })
+      :
+      this.setState({ price: '' })
     this.setState({ [event.target.name]: event.target.value })
   }
 
@@ -18,6 +22,10 @@ class NewPayment extends Component {
         price: price || 0,
         category,
         date: new Date()
+    })
+    this.props.lastPrice({
+      price: price || 0,
+      category
     })
     this.setState({ price: ''})
   }
@@ -61,6 +69,14 @@ function mapDispatchToProps(dispatch){
           {
             type: "ADD_PAYMENT",
             payload: payment
+          }
+        )
+      },
+      lastPrice:(price) => {
+        dispatch(
+          {
+            type: "ADD_LAST_PRICE",
+            payload: price
           }
         )
       }
