@@ -51,7 +51,7 @@ class incomeChart extends Component {
              height={400} 
             />
             <p> Total income:  
-              {this.difference()}, $
+              {this.state.data.datasets[0].data.reduce((sum, current) => sum + current)}, $
             </p>
           </div>
           :
