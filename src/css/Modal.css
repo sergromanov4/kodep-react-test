@@ -21,3 +21,7 @@
   bottom: 0;
   background: rgba(40, 44, 52, 0.7);
 }
+
+.alarm {
+  border: 2px solid red;
+}

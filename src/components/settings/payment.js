@@ -10,25 +10,19 @@ class Payment extends Component {
     newCategory: '',
     editCategory: '',
     editIndex: 0,
-    edit: false
+    edit: false,
+    unique:false
   }
 
   componentWillMount() {
     Modal.setAppElement('body')
   }
 
-  uniqueFlag() {
-    const { paymentCategories } = this.props;
-    const { newCategory } = this.state;
-    if (paymentCategories.indexOf(newCategory)>0) return true
-    return false
-  }
-
   handeleSubmitNew = event => {
     event.preventDefault()
     const { newCategory } = this.state
     const { addPaymentCategory } = this.props
-    if (newCategory && !this.uniqueFlag()) addPaymentCategory(newCategory) 
+    addPaymentCategory(newCategory) 
     this.setState({ newCategory: "" })
     this.toggleModal()
   }
@@ -46,7 +40,7 @@ class Payment extends Component {
 
   handleRemove = index => {
     const { removePaymentCategory, paymentCategories, editRemovePaymentCategory } = this.props
-    if (window.confirm("Are you sure?")){
+    if (window.confirm("Are you sure?")) {
       removePaymentCategory(paymentCategories[index])
       editRemovePaymentCategory(paymentCategories[index])
     }
@@ -54,7 +48,9 @@ class Payment extends Component {
 
   toggleModal = () => {
     const { edit, isActive } = this.state
-    this.setState({ isActive: !isActive })
+    this.setState({ isActive: !isActive,
+                    newCategory: '',
+                    unique: false })
     if (edit) this.setState({ edit: false }) 
   }
   
@@ -64,11 +60,16 @@ class Payment extends Component {
     this.setState({ isActive: !isActive,
                     edit: !edit,
                     editCategory: paymentCategories[index],
-                    editIndex: index })
+                    editIndex: index,
+                    unique:true })
   }
 
   handleChange = event => {
     const { name, value } = event.target
+    this.props.paymentCategories.indexOf(value)<0 ? 
+      this.setState({ unique: false })
+      :
+      this.setState({ unique: true })
     this.setState({ [name]: value })
   }
 
@@ -104,6 +105,7 @@ class Payment extends Component {
               categoryValue={this.state.editCategory}
               changeValue={this.handleChange}
               name="editCategory"
+              unique={this.state.unique}
             />
           :
             <Form 
@@ -112,6 +114,7 @@ class Payment extends Component {
               categoryValue={this.state.newCategory}
               changeValue={this.handleChange}
               name="newCategory"
+              unique={this.state.unique}
             />
           }
         </Modal>
