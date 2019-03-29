@@ -11,7 +11,7 @@ class Payment extends Component {
     editCategory: '',
     editIndex: 0,
     edit: false,
-    unique:false
+    unique: false
   }
 
   componentWillMount() {
@@ -39,8 +39,9 @@ class Payment extends Component {
   }
 
   handleRemove = index => {
-    const { removePaymentCategory, paymentCategories, editRemovePaymentCategory } = this.props
-    if (window.confirm("Are you sure?")) {
+    const { removePaymentCategory, paymentCategories, 
+            editRemovePaymentCategory } = this.props
+    if(window.confirm("Are you sure?")) {
       removePaymentCategory(paymentCategories[index])
       editRemovePaymentCategory(paymentCategories[index])
     }
@@ -51,7 +52,7 @@ class Payment extends Component {
     this.setState({ isActive: !isActive,
                     newCategory: '',
                     unique: false })
-    if (edit) this.setState({ edit: false }) 
+    if(edit) this.setState({ edit: false }) 
   }
   
   toggleModalEdit = index => {
@@ -61,7 +62,7 @@ class Payment extends Component {
                     edit: !edit,
                     editCategory: paymentCategories[index],
                     editIndex: index,
-                    unique:true })
+                    unique: true })
   }
 
   handleChange = event => {
@@ -123,31 +124,31 @@ class Payment extends Component {
   } 
 }
 
-function mapStateToProps(state){
+function mapStateToProps(state) {
   return state.paymentReducer
 }
 
-function mapDispatchToProps(dispatch){
+function mapDispatchToProps(dispatch) {
   return{
-    removePaymentCategory:(category) => {
+    removePaymentCategory: category => {
       dispatch({
         type: "REMOVE_PAYMENT_CATEGORY",
         payload: category
       })
     },
-    editRemovePaymentCategory:(category) => {
+    editRemovePaymentCategory: category => {
       dispatch({
         type: "EDIT_REMOVE_PAYMENT_CATEGORY",
         payload: category
       })
     },
-    addPaymentCategory:(payment) => {
+    addPaymentCategory: payment => {
       dispatch({
         type: "ADD_NEW_PAYMENT_CATEGORY",
         payload: payment
       })
     },
-    editPaymentCategory:(category) => {
+    editPaymentCategory: category => {
       dispatch({
         type: "EDIT_PAYMENT_CATEGORY",
         payload: category

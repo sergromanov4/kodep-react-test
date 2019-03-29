@@ -31,20 +31,23 @@ class Charts extends Component {
   }
 
   componentWillMount() {
-    this.setState({ currentDate: this.state.date[this.props.currentDate] })
+    const { date } = this.state
+    const { currentDate } = this.props
+    this.setState({ currentDate: date[currentDate] })
   }
 
   render(){
+    const { currentDate, date, totalPayment, totalIncome } = this.state
     return(
       <div>
         <form onSubmit={this.handleSubmit} className="data-form">
           <select 
             name="currentDate"
             onChange={this.handleChange} 
-            value={this.state.currentDate}
+            value={currentDate}
             ref="select"
           >
-            {this.state.date.map((item, index) => 
+            {date.map((item, index) => 
               <option value={item} key={index}>
                 { item }
               </option>)}
@@ -55,8 +58,8 @@ class Charts extends Component {
           <PaymentChart count={this.countPayment} />
           <IncomeChart count={this.countIncome} />
         </div>
-        { this.state.totalPayment-this.state.totalIncome !== 0 ?
-            this.state.totalPayment-this.state.totalIncome > 0 ? 
+        {totalPayment-totalIncome !== 0 ?
+          totalPayment-totalIncome > 0 ? 
             <p>More payments</p> : <p>Income more</p>
           : 
           <p>Payments are equal to income</p>}
@@ -65,11 +68,11 @@ class Charts extends Component {
   }
 }
 
-function mapStateToProps(state){
+function mapStateToProps(state) {
   return state.timeReducer
 }
 
-function mapDispatchToProps(dispatch){
+function mapDispatchToProps(dispatch) {
   return{
       changeData: data => {
         dispatch({

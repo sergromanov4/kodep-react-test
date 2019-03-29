@@ -11,7 +11,7 @@ class Income extends Component {
     editCategory: '',
     editIndex: 0,
     edit: false,
-    unique:false
+    unique: false
   }
 
   componentWillMount() {
@@ -40,7 +40,7 @@ class Income extends Component {
 
   handleRemove = index => {
     const { removeIncomeCategory, incomeCategories, editRemoveIncomeCategory } = this.props
-    if (window.confirm("Are you sure?")) {
+    if(window.confirm("Are you sure?")) {
       removeIncomeCategory(incomeCategories[index])
       editRemoveIncomeCategory(incomeCategories[index])
     }
@@ -51,7 +51,7 @@ class Income extends Component {
     this.setState({ isActive: !isActive,
                     newCategory: '',
                     unique: false })
-    if (edit) this.setState({ edit: false, }) 
+    if(edit) this.setState({ edit: false, }) 
   }
   
   toggleModalEdit = index => {
@@ -61,7 +61,7 @@ class Income extends Component {
                     edit: !edit,
                     editCategory: incomeCategories[index],
                     editIndex: index,
-                    unique:true })
+                    unique: true })
   }
 
   handleChange = event => {
@@ -74,11 +74,14 @@ class Income extends Component {
   }
 
   render() {
+    const { incomeCategories } = this.props
+    const { isActive, edit, editCategory, 
+            unique, newCategory } = this.state
     return(
       <div className="settings">
         <h2> Income settings</h2>
         <button onClick={this.toggleModal} className="new-btn">New income category</button>
-        {this.props.incomeCategories.map((item, index)=>
+        {incomeCategories.map((item, index)=>
           <div className="setting-list" key={index}>
             <p>{item}</p>
             <div className='btn-box'>
@@ -93,28 +96,28 @@ class Income extends Component {
           </div>
         )}
         <Modal 
-          isOpen={this.state.isActive} 
+          isOpen={isActive} 
           onRequestClose={this.toggleModal} 
           className="modal" 
           overlayClassName="modal-overlay"
         >
-          {this.state.edit ? 
+          {edit ? 
             <Form 
               title="Edit category"
               submitForm={this.handeleSubmitEdit} 
-              categoryValue={this.state.editCategory}
+              categoryValue={editCategory}
               changeValue={this.handleChange}
               name="editCategory"
-              unique={this.state.unique}
+              unique={unique}
             />
           :
             <Form 
               title="New category"
               submitForm={this.handeleSubmitNew} 
-              categoryValue={this.state.newCategory}
+              categoryValue={newCategory}
               changeValue={this.handleChange}
               name="newCategory"
-              unique={this.state.unique}
+              unique={unique}
             />
           }
         </Modal>
@@ -123,31 +126,31 @@ class Income extends Component {
   } 
 }
 
-function mapStateToProps(state){
+function mapStateToProps(state) {
   return state.incomeReducer
 }
 
-function mapDispatchToProps(dispatch){
+function mapDispatchToProps(dispatch) {
   return{
-    removeIncomeCategory:(category) => {
+    removeIncomeCategory: category => {
       dispatch({
         type: "REMOVE_INCOME_CATEGORY",
         payload: category
       })
     },
-    editRemoveIncomeCategory:(category) => {
+    editRemoveIncomeCategory: category => {
       dispatch({
         type: "EDIT_REMOVE_INCOME_CATEGORY",
         payload: category
       })
     },
-    addIncomeCategory:(income) => {
+    addIncomeCategory: income => {
       dispatch({
         type: "ADD_NEW_INCOME_CATEGORY",
         payload: income
       })
     },
-    editIncomeCategory:(category) => {
+    editIncomeCategory: category => {
       dispatch({
         type: "EDIT_INCOME_CATEGORY",
         payload: category

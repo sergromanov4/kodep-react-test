@@ -12,7 +12,7 @@ class incomeChart extends Component {
         data: [],
         backgroundColor: colors
       }]
-   }
+    }
   }
 
   componentWillMount() {
@@ -34,23 +34,27 @@ class incomeChart extends Component {
   }
 
   difference() {
-    if (this.state.data.labels[0])
-    return this.props.count(this.state.data.datasets[0].data.reduce((sum, current) => sum + current))
+    const { data } = this.state
+    if (data.labels[0])
+      return this.props.count(data.datasets[0].data.reduce(
+        (sum, current) => sum + current))
   }
 
   render() {
+    const { data } = this.state
     return(
       <div className="charts">
         <p>Income Charts</p>
-        {this.state.data.labels[0]? 
+        {data.labels[0]? 
           <div> 
             <Pie 
-             data={this.state.data}
+             data={data}
              width={400}
              height={400} 
             />
             <p> Total income:  
-              {this.state.data.datasets[0].data.reduce((sum, current) => sum + current)}, $
+              {data.datasets[0].data.reduce(
+                (sum, current) => sum + current)}, $
             </p>
           </div>
           :
@@ -61,7 +65,7 @@ class incomeChart extends Component {
   }
 }
 
-function mapStateToProps(state){
+function mapStateToProps(state) {
   return state
 }
 

@@ -27,7 +27,7 @@ function incomeReducer(state=initialState,action){
                )
              }
     case "REMOVE_INCOME_CATEGORY":
-      return {...state, incomeCategories: state.incomeCategories.filter( item => item !== action.payload )}
+      return {...state, incomeCategories: state.incomeCategories.filter(item => item !== action.payload)}
     default:
       return state
  }

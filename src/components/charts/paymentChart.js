@@ -12,7 +12,7 @@ class paymentChart extends Component {
         data: [],
         backgroundColor: colors
       }]
-   }
+    }
   }
 
   componentWillMount() {
@@ -30,20 +30,22 @@ class paymentChart extends Component {
       labels.push(key)
       datasets[0].data.push(total[key])
     }
-    if (this.state.data.labels[0])
-    this.props.count(this.state.data.datasets[0].data.reduce((sum, current) => sum + current))
+    this.difference()
   }
 
   difference() {
-    if (this.state.data.labels[0])
-    return this.props.count(this.state.data.datasets[0].data.reduce((sum, current) => sum + current))
+    const { data } = this.state
+    if (data.labels[0])
+    return this.props.count(data.datasets[0].data.reduce(
+      (sum, current) => sum + current))
   }
 
   render() {
+    const { data } = this.state
     return(
       <div className="charts">
         <p>Payment Charts</p>
-        {this.state.data.labels[0]? 
+        {data.labels[0]? 
           <div> 
             <Pie 
              data={this.state.data}
@@ -51,7 +53,8 @@ class paymentChart extends Component {
              height={400} 
             />
             <p> Total payment:  
-              {this.state.data.datasets[0].data.reduce((sum, current) => sum + current)}, $
+              {data.datasets[0].data.reduce(
+                (sum, current) => sum + current)}, $
             </p>
           </div>
           :
@@ -62,7 +65,7 @@ class paymentChart extends Component {
   }
 }
 
-function mapStateToProps(state){
+function mapStateToProps(state) {
   return state
 }
 
