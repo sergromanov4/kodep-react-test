@@ -78,5 +78,7 @@ form button {
 }
 
 .list p {
-  border-bottom: 2px solid #fff
+  border-bottom: 1px solid #999;
+  width: 480px;
+  word-wrap: break-word;
 }

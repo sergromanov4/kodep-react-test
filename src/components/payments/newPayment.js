@@ -50,6 +50,7 @@ class NewPayment extends Component {
             name="price" 
             type='number'
             min='0' 
+            max='999999'
             placeholder="Add price, $" 
             onChange={this.handleChange} 
             value={price}

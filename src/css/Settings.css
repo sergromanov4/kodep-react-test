@@ -23,7 +23,10 @@
 }
 
 .setting-list p {
+  text-align: left;
   margin-left: 15px;
+  width: 340px;
+  word-wrap: break-word;
 }
 
 .btn-box button {

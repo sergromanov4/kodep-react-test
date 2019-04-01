@@ -5,10 +5,7 @@ import IncomeChart from '../components/charts/incomeChart.js'
 
 class Charts extends Component {
   state={
-    date: ['January', 'February', 'March',
-            'April', 'May', 'June', 'July', 
-            'August', 'September', 'October', 
-            'November', 'December'],
+    allDate:[ ],
     totalPayment: 0,
     totalIncome: 0       
   }
@@ -26,18 +23,33 @@ class Charts extends Component {
   }
 
   handleSubmit = event => {
-    const { date, currentDate } = this.state
-    this.props.changeData(date.indexOf(currentDate))
+    const { currentDate } = this.state
+    this.props.changeData(currentDate)
+  }
+
+  getAllDate(arr){
+    let year, month
+    arr.map(
+      item => {
+         year = new Date(item.date).getFullYear()
+         month = new Date(item.date).getMonth()
+         if (this.state.allDate.indexOf(`${month+1}/${year}`) < 0) 
+          this.state.allDate.push(`${month+1}/${year}`)
+        return this.state.allDate
+      })
   }
 
   componentWillMount() {
-    const { date } = this.state
-    const { currentDate } = this.props
-    this.setState({ currentDate: date[currentDate] })
+    const { currentDate } = this.props.timeReducer
+    const { income } = this.props.incomeReducer
+    const { payments } = this.props.paymentReducer
+    this.getAllDate(payments)
+    this.getAllDate(income)
+    this.setState({ currentDate: currentDate })
   }
 
-  render(){
-    const { currentDate, date, totalPayment, totalIncome } = this.state
+  render() {
+    const { currentDate, totalPayment, totalIncome, allDate} = this.state
     return(
       <div>
         <form onSubmit={this.handleSubmit} className="data-form">
@@ -47,7 +59,7 @@ class Charts extends Component {
             value={currentDate}
             ref="select"
           >
-            {date.map((item, index) => 
+            {allDate.map((item, index) => 
               <option value={item} key={index}>
                 { item }
               </option>)}
@@ -55,7 +67,7 @@ class Charts extends Component {
           <button type="submit">select</button>
         </form>
         <div className="charts-box">
-          <PaymentChart count={this.countPayment} />
+          <PaymentChart count={this.countPayment}/>
           <IncomeChart count={this.countIncome} />
         </div>
         {totalPayment-totalIncome !== 0 ?
@@ -71,7 +83,7 @@ class Charts extends Component {
 }
 
 function mapStateToProps(state) {
-  return state.timeReducer
+  return state
 }
 
 function mapDispatchToProps(dispatch) {

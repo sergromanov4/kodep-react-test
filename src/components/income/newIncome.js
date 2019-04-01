@@ -42,6 +42,7 @@ class NewIncome extends Component {
         <input 
           type="number"
           min='0'
+          max='999999'
           name="money"
           placeholder="Add your salary, $"
           onChange={this.handleChange}
