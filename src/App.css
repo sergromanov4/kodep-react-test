@@ -9,12 +9,12 @@
 
 .App-header {
   background-color: #282c34;
-  min-height: 5vh;
+  min-height: 35px;
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 1vmin);
+  font-size: 25px;
   color: white;
 }
 .App-header a {
@@ -62,11 +62,12 @@ form p {
 form button {
   width: 150px;
   height: 30px;
- font-size: 20px;
+  font-size: 20px;
  }
 
 .list {
   margin-top: 30px;
+  width: 500px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -77,5 +78,7 @@ form button {
 }
 
 .list p {
-  border-bottom: 2px solid #fff
+  border-bottom: 1px solid #999;
+  width: 480px;
+  word-wrap: break-word;
 }

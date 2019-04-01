@@ -7,7 +7,11 @@ class NewPayment extends Component {
       price: ''
   }
   
-  handleChange = event => {
+  handleChange = event => { 
+    (event.target.name === "category" &&  this.props.lastValue[event.target.value])?
+      this.setState({ price: this.props.lastValue[event.target.value] })
+      :
+      this.setState({ price: '' })
     this.setState({ [event.target.name]: event.target.value })
   }
 
@@ -16,13 +20,19 @@ class NewPayment extends Component {
     const { price, category } = this.state
     this.props.addPayment({
         price: price || 0,
-        category
+        category,
+        date: new Date()
+    })
+    this.props.lastPrice({
+      price: price || 0,
+      category
     })
     this.setState({ price: ''})
   }
 
   render() {
     const { price, category } = this.state
+    const { paymentCategories } = this.props
     return (
         <form onSubmit={this.handleSubmit}>
           <p>Select category and write price</p>
@@ -31,14 +41,16 @@ class NewPayment extends Component {
             onChange={this.handleChange} 
             value={category}
           >
-            {this.props.paymentCategories.map((item, index) => 
+            {paymentCategories.map((item, index) => 
               <option value={item} key={index}>
                 { item }
               </option>)}
           </select>
           <input 
             name="price" 
-            type='number' 
+            type='number'
+            min='0' 
+            max='999999'
             placeholder="Add price, $" 
             onChange={this.handleChange} 
             value={price}
@@ -49,19 +61,23 @@ class NewPayment extends Component {
   }
 }
   
-function mapStateToProps(state){
+function mapStateToProps(state) {
   return state.paymentReducer
 }
 
-function mapDispatchToProps(dispatch){
+function mapDispatchToProps(dispatch) {
   return{
-      addPayment:(payment) => {
-        dispatch(
-          {
+      addPayment: payment => {
+        dispatch({
             type: "ADD_PAYMENT",
             payload: payment
-          }
-        )
+        })
+      },
+      lastPrice: price => {
+        dispatch({
+            type: "ADD_LAST_PRICE",
+            payload: price
+        })
       }
   }
 }

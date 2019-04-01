@@ -1,0 +1,35 @@
+.settings {
+  width: 500px;
+  background: #282c34;
+  color: #fff;
+  border-radius: 15px;
+}
+
+.new-btn {
+  margin-bottom: 20px;
+  font-size: 16px;
+}
+
+.setting-list {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #999;
+}
+
+.setting-list:last-child {
+  border-bottom: none;
+}
+
+.setting-list p {
+  text-align: left;
+  margin-left: 15px;
+  width: 340px;
+  word-wrap: break-word;
+}
+
+.btn-box button {
+  margin-right: 10px;
+  font-size: 16px;
+}

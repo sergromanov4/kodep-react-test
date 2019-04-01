@@ -8,7 +8,8 @@ class NewIncome extends Component {
   }
 
   handleChange = event => {
-    this.setState({ [event.target.name]: event.target.value })
+    const { name, value } = event.target
+    this.setState({ [name]: value })
   }
 
   handleSubmit = event => {
@@ -16,13 +17,15 @@ class NewIncome extends Component {
     const { money, category } = this.state
     this.props.addIncome({
         money: money || 0,
-        category
+        category,
+        date: new Date()
     })
     this.setState({ money: ''})
   }
 
   render() {
     const { category, money } = this.state
+    const { incomeCategories } = this.props
     return (
       <form onSubmit={this.handleSubmit}>
         <p>Select income category and write price</p>
@@ -31,13 +34,15 @@ class NewIncome extends Component {
           onChange={this.handleChange}
           value={category}
         >
-          {this.props.incomeCategories.map((item,index) => 
+          {incomeCategories.map((item,index) => 
             <option value={item} key={index}>
               {item}
             </option>)}
         </select>
         <input 
           type="number"
+          min='0'
+          max='999999'
           name="money"
           placeholder="Add your salary, $"
           onChange={this.handleChange}
@@ -49,19 +54,17 @@ class NewIncome extends Component {
   }
 }
   
-function mapStateToProps(state){
+function mapStateToProps(state) {
   return state.incomeReducer
 }
 
-function mapDispatchToProps(dispatch){
+function mapDispatchToProps(dispatch) {
   return{
-      addIncome:(income) => {
-        dispatch(
-          {
+      addIncome: income => {
+        dispatch({
             type: "ADD_INCOME",
             payload: income
-          }
-        )
+        })
       }
   }
 }

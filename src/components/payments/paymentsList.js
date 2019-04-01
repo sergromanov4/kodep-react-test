@@ -3,9 +3,10 @@ import { connect } from 'react-redux'
 
 class List extends Component {
   render() {
+    const { payments } = this.props
     return(
       <div className="list">
-        {this.props.payments.map((item, index)=>
+        {payments.map((item, index)=>
           <p key={index}>
               {`${item.price}, $`}  |  {item.category}
           </p>)}
@@ -14,7 +15,7 @@ class List extends Component {
   }
 }
 
-function mapStateToProps(state){
+function mapStateToProps(state) {
   return state.paymentReducer
 }
 
