@@ -18,8 +18,8 @@ class Income extends Component {
     Modal.setAppElement('body')
   }
 
-  handeleSubmitNew = event => {
-    event.preventDefault()
+  handeleSubmitNew = e => {
+    e.preventDefault()
     const { newCategory } = this.state
     const { addIncomeCategory } = this.props
     addIncomeCategory(newCategory) 
@@ -27,8 +27,8 @@ class Income extends Component {
     this.toggleModal()
   }
 
-  handeleSubmitEdit = event => {
-    event.preventDefault()
+  handeleSubmitEdit = e => {
+    e.preventDefault()
     const { editCategory, editIndex } = this.state
     const { editIncomeCategory } =this.props
     editIncomeCategory({ 
@@ -64,8 +64,8 @@ class Income extends Component {
                     unique: true })
   }
 
-  handleChange = event => {
-    const { name, value } = event.target
+  handleChange = e => {
+    const { name, value } = e.target
     this.props.incomeCategories.indexOf(value)<0 ? 
       this.setState({ unique: false })
       :

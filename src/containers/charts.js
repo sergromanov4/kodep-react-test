@@ -18,13 +18,12 @@ class Charts extends Component {
    this.setState({ totalIncome: value })
   }
 
-  handleChange = event => {
-    this.setState({ [event.target.name]: event.target.value })
+  handleChange = e => {
+    this.setState({ [e.target.name]: e.target.value })
   }
 
-  handleSubmit = event => {
-    const { currentDate } = this.state
-    this.props.changeData(currentDate)
+  handleSubmit = e => {
+    this.props.changeData(e.target.currentDate.value)
   }
 
   getAllDate(arr){

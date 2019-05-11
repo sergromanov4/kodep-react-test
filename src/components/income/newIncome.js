@@ -7,13 +7,13 @@ class NewIncome extends Component {
     money: ''
   }
 
-  handleChange = event => {
-    const { name, value } = event.target
+  handleChange = e => {
+    const { name, value } = e.target
     this.setState({ [name]: value })
   }
 
-  handleSubmit = event => {
-    event.preventDefault()
+  handleSubmit = e => {
+    e.preventDefault()
     const { money, category } = this.state
     this.props.addIncome({
         money: money || 0,

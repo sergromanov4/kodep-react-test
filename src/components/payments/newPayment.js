@@ -7,16 +7,16 @@ class NewPayment extends Component {
       price: ''
   }
   
-  handleChange = event => { 
-    (event.target.name === "category" &&  this.props.lastValue[event.target.value])?
-      this.setState({ price: this.props.lastValue[event.target.value] })
+  handleChange = e => { 
+    (e.target.name === "category" &&  this.props.lastValue[e.target.value])?
+      this.setState({ price: this.props.lastValue[e.target.value] })
       :
       this.setState({ price: '' })
-    this.setState({ [event.target.name]: event.target.value })
+    this.setState({ [e.target.name]: e.target.value })
   }
 
-  handleSubmit = event => {
-    event.preventDefault()
+  handleSubmit = e => {
+    e.preventDefault()
     const { price, category } = this.state
     this.props.addPayment({
         price: price || 0,

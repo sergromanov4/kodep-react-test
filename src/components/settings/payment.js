@@ -18,8 +18,8 @@ class Payment extends Component {
     Modal.setAppElement('body')
   }
 
-  handeleSubmitNew = event => {
-    event.preventDefault()
+  handeleSubmitNew = e => {
+    e.preventDefault()
     const { newCategory } = this.state
     const { addPaymentCategory } = this.props
     addPaymentCategory(newCategory) 
@@ -27,8 +27,8 @@ class Payment extends Component {
     this.toggleModal()
   }
 
-  handeleSubmitEdit = event => {
-    event.preventDefault()
+  handeleSubmitEdit = e => {
+    e.preventDefault()
     const { editCategory, editIndex } = this.state
     const { editPaymentCategory } =this.props
     editPaymentCategory({ 
@@ -65,8 +65,8 @@ class Payment extends Component {
                     unique: true })
   }
 
-  handleChange = event => {
-    const { name, value } = event.target
+  handleChange = e => {
+    const { name, value } = e.target
     this.props.paymentCategories.indexOf(value)<0 ? 
       this.setState({ unique: false })
       :
